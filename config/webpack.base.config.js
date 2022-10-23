@@ -12,6 +12,9 @@ const webpackBaseConfig = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      pages: path.join(__dirname, "../src/pages"),
+    },
   },
   module: {
     rules: [

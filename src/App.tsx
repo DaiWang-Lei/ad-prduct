@@ -1,10 +1,20 @@
-import React, { FC } from "react";
+import React, { Children, FC } from "react";
+import { useHistory, useLocation } from "react-router";
 import "./style.scss";
 
-interface AppProps{
+interface AppProps {}
+const App: FC<AppProps> = (props) => {
+  const { children } = props;
+  const { pathname } = useLocation();
+  const history = useHistory();
+  const handleRoute = () => {
+    if (pathname === "/") {
+      history.push("index");
+      return false;
+    }
+    return true;
+  };
 
-}
-const App:FC<AppProps> = (props) => {
-  return <h1>Hello PDD,,,</h1>;
+  return <div>{handleRoute() ? children : "other"}</div>;
 };
 export default App;
