@@ -9,7 +9,7 @@ const App: FC<AppProps> = (props) => {
   const history = useHistory();
   const handleRoute = () => {
     if (pathname === "/") {
-      history.push("index");
+      history.push("home");
       return false;
     }
     return true;

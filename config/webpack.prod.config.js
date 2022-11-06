@@ -3,12 +3,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { merge } = require("webpack-merge");
 const webpackBaseConfig = require("./webpack.base.config");
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpackProdConfig = {
   mode: "production",
   plugins: [
     new CleanWebpackPlugin({
       protectWebpackAssets: true,
+    }),
+    new MiniCssExtractPlugin ({
+      filename:'[name].[fullhash:4].css',
     }),
     new HtmlWebpackPlugin({
       inject: "body",

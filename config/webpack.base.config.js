@@ -2,7 +2,8 @@ const path = require("path");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const devMode = process.env.NODE_ENV !== 'production'
+
+const devMode = process.env.NODE_ENV !== "production";
 
 const webpackBaseConfig = {
   entry: path.join(__dirname, "../src/index.jsx"),
@@ -14,13 +15,14 @@ const webpackBaseConfig = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
       pages: path.join(__dirname, "../src/pages"),
+      "@utils": path.join(__dirname, "../src/utils/"),
     },
   },
   module: {
     rules: [
-      { test: /\.js[x]/, use: "babel-loader" },
+      { test: /\.jsx?$/, use: "babel-loader" },
       {
-        test: /\.ts[x]/,
+        test: /\.tsx?$/,
         use: {
           loader: "ts-loader",
           options: {
@@ -30,7 +32,11 @@ const webpackBaseConfig = {
       },
       {
         test: /\.(sc|c)ss/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
       },
     ],
   },

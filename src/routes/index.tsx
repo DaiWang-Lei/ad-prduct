@@ -7,7 +7,7 @@ import App from "../App";
 
 const allRoutes = [
   {
-    path: "/index",
+    path: "/home",
     component: IndexPage,
     exact: false,
   },
